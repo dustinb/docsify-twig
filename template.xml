@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<template>
+  <author>Dustin Butler</author>
+  <email>dustin@fivetechnology.com</email>
+  <version>1.0.0</version>
+  <copyright>None</copyright>
+  <description><![CDATA[
+    Modification of the built in twig-responsive template to output markdown files
+  ]]></description>
+  <transformations>
+    <transformationX query="copy" writer="FileIo" source="templates/responsive/img" artifact="img"/>
+    <transformationX query="copy" writer="FileIo" source="templates/responsive/css" artifact="css"/>
+    <transformationX query="copy" writer="FileIo" source="templates/responsive/js" artifact="js"/>
+    <transformationX writer="twig" source="templates/responsive-twig/index.html.twig" artifact="index.html"/>
+    <transformationX query="indexes.namespaces" writer="twig" source="templates/responsive-twig/namespace.html.twig" />
+    <transformationX query="indexes.packages" writer="twig" source="templates/responsive-twig/package.html.twig" />
+    <transformation query="indexes.classes" writer="twig" source="templates/docsify-twig/class.md.twig" />
+    <transformationX query="indexes.interfaces" writer="twig" source="templates/responsive-twig/class.html.twig" />
+    <transformationX query="indexes.traits" writer="twig" source="templates/responsive-twig/class.html.twig" />
+    <transformationX writer="twig" source="templates/responsive-twig/reports/markers.html.twig" artifact="markers.html"/>
+    <transformationX writer="twig" source="templates/responsive-twig/reports/errors.html.twig" artifact="errors.html"/>
+    <transformationX writer="twig" source="templates/responsive-twig/reports/deprecated.html.twig" artifact="deprecated.html"/>
+    <transformationX writer="twig" source="templates/responsive-twig/graphs/class.html.twig" artifact="graph_class.html"/>
+    <transformationX writer="Graph" source="Class" artifact="classes.svg" />
+  </transformations>
+</template>
