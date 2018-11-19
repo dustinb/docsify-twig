@@ -1,6 +1,6 @@
-# TLDR;
+# TLDR
 
-To build some docs
+To get started building some docs
 
 1. git clone git@github.com:dustinb/docsify-twig.git
 2. Modify api-build.sh to set SOURCE and TARGET
