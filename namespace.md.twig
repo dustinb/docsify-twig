@@ -1,0 +1,91 @@
+{% import _self as self %}
+
+# Namespaces
+[{{ node.name }}]({{ path(node) }})
+
+{% set counter = 0 %}
+{# {{ self.renderNamespaceSidebar(node) }} #}
+{{ self.renderNamespaceDetails(node) }}
+
+
+{% macro elementSummary(element, type) %}
+
+##### [{{ element.name }}]({{ path(element) }})
+
+{{ element.summary }}
+
+{% if type == 'function' %}
+  {% include 'method.html.twig' with {'method': element} %}
+{% else %}
+  {{ element.description|raw }}
+{% endif %}
+
+{% endmacro %}{# elementSummary #}
+
+{% macro buildBreadcrumb(element) %}
+{% set value = 'no spaces' %}
+{% import _self as self %}
+{% if element.parent and element.parent.name != '\\' %}{{ self.buildBreadcrumb(element.parent) }}{% endif %}
+[{{ element.name }}]({{ path(element) }})
+{% endmacro %}
+
+{% macro renderNamespaceDetails(node) %}
+{% import _self as self %}
+### {{ node.name }}
+
+{% if node.classes|length > 0 or node.interfaces|length > 0 or node.traits|length > 0 or node.functions|length > 0 or node.constants|length > 0 %}
+
+{{ self.buildBreadcrumb(node) }}
+
+{% if node.functions|length > 0 %}
+<div class="namespace-indent">
+<h3><i class="icon-custom icon-function"></i> Functions</h3>
+{% for function in node.functions|sort_asc %}
+{{ self.elementSummary(function, 'function') }}
+{% endfor %}
+</div>
+{% endif %}
+
+{% if node.constants|length > 0 %}
+<div class="namespace-indent">
+<h3><i class="icon-custom icon-constant"></i> Constants</h3>
+{% for constant in node.constants %}
+{{ self.elementSummary(constant, 'constant') }}
+{% endfor %}
+</div>
+{% endif %}
+
+{% if node.classes|length > 0 or node.interfaces|length > 0 or node.traits|length > 0 %}
+
+### Classes, interfaces and traits
+{% for trait in node.traits|sort_asc %}
+{{ self.elementSummary(trait, 'trait') }}
+{% endfor %}
+
+{% for interface in node.interfaces|sort_asc %}
+{{ self.elementSummary(interface, 'interface') }}
+{% endfor %}
+
+{% for class in node.classes|sort_asc %}
+{{ self.elementSummary(class, 'class') }}
+{% endfor %}
+
+{% endif %}{# node.classes|length #}
+{% endif %}
+
+{% for namespace in node.children %}
+{{ self.renderNamespaceDetails(namespace) }}
+{% endfor %}
+{% endmacro %}{# renderNamespaceDetails #}
+
+
+{#
+{% macro renderNamespaceSidebar(node) %}
+{% import _self as self %}
+**{% set counter = counter + 1 %}**
+{% for namespace in node.children|sort_asc %}
+[{{ namespace.name }}]({{ path(namespace) }})
+{{ self.renderNamespaceSidebar(namespace) }}
+{% endfor %}
+{% endmacro %}
+#}

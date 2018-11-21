@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<phpdoc>
+  <title>The Boss</title>
+  <parser>
+    <target>/tmp/phpdocumentor</target>
+  </parser>
+  <transformer>
+    <target>../docs/api</target>
+  </transformer>
+  <files>
+    <directory>../res</directory>
+    <ignore>google_auth/</ignore>
+    <ignore>google_calendar/</ignore>
+    <ignore>quickbooks-php/</ignore>
+    <ignore>wizard/</ignore>
+    <ignore>angular/rest/</ignore>
+    <ignore>pb/rest/</ignore>
+    <ignore>res/hipchat/</ignore>
+  </files>
+  <transformations>
+    <template name="docsify-twig" />
+  </transformations>
+</phpdoc>

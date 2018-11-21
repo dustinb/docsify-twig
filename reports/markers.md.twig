@@ -1,0 +1,28 @@
+
+## Markers
+
+{#
+{% set markerCount = 0 %}
+{% set markerCount = markerCount + file.markers|length %}
+#}
+{% for file in project.files %}
+{% if file.markers|length > 0 %}
+* [{{ file.path }}]({{ file.path }})
+{% endif %}
+{% endfor %}
+
+{{ path('/') }}
+
+{% for file in project.files %}
+  {% if file.markers|length > 0 %}
+
+### {{ file.path }}
+
+| Type              | Line              | Description          |
+|-------------------|-------------------|----------------------|
+    {% for marker in file.markers %}
+| {{ marker.type }} | {{ marker.line }} | {{ marker.message|raw|trim }} |
+    {% endfor %}{# for marker #}
+  {% endif %}
+{%  endfor %}
+

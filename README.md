@@ -3,9 +3,19 @@
 To get started building some docs
 
 1. git clone git@github.com:dustinb/docsify-twig.git
-2. Modify api-build.sh to set SOURCE and TARGET
-3. sh api-build.sh 
-4. Modify template.xml and/or the class.md.twig template file
+
+2. Modify phpdoc.xml (elemens below) with your target and direcstory (source)
+
+```xml
+<transformer>
+    <target>../docs/api</target>
+  </transformer>
+  <files>
+    <directory>../res</directory>
+  </files>
+```    
+3. run `sh api-build.sh`.  Will run composer, move template to correct location and build docs
+ 
 
 # docsify-twig
 

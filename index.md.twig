@@ -1,0 +1,39 @@
+# {{ project.name|raw }} Documentation
+
+{% block content %}
+
+{% if project.indexes.namespaces|length > 0 or not project.indexes.packages %}
+
+## Namespaces
+{% block listRootNamespaces %}
+* [Global ({{ project.namespace.name }})]({{ path(project.namespace) }})
+{% for namespace in project.namespace.children|sort_asc %}
+  * [{{ namespace.name }}]({{ path(namespace) }})
+{% endfor %}
+{% endblock %}
+
+{% endif %}
+
+{% if project.indexes.packages|length > 0 %}
+## Packages
+{% block listRootPackages %}
+* [Global {{ (project.indexes.packages|first).name }}]({{ path(project.indexes.packages|first) }})
+{% for package in (project.indexes.packages|first).children|sort_asc %}
+  * [{{ package.name }}]({{ path(package) }})
+{% endfor %}
+{% endblock %}
+{% endif %}
+
+## Charts
+{% block listCharts %}
+    * [Class inheritance diagram]({{ path('graph_class.html') }})
+{% endblock %}
+
+## Reports
+{% block listReports %}
+* [Errors {{ macros.renderErrorCounter(project.files) }}]({{ path('errors.html') }})
+* [Deprecated {{ macros.renderDeprecatedCounter(project.indexes.elements) }}]({{ path('deprecated.html') }})
+* [Markers {{ macros.renderMarkerCounter(project.files) }}]({{ path('markers.html') }})
+{% endblock %}
+
+{% endblock %}
