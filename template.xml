@@ -15,6 +15,7 @@
     <transformation writer="twig" source="templates/docsify-twig/index.md.twig" artifact="README.md"/>
     <transformation query="indexes.namespaces" writer="twig" source="templates/docsify-twig/namespace.md.twig" artifact="namespaces/{{name}}.md"/>
     <transformation query="indexes.packages" writer="twig" source="templates/docsify-twig/package.html.twig" />
+    <transformation writer="twig" source="templates/docsify-twig/class_sidebar.md.twig" artifact="classes/_sidebar.md"/>
     <transformation query="indexes.classes" writer="twig" source="templates/docsify-twig/class.md.twig" artifact="classes/{{name}}.md"/>
     <transformation query="indexes.interfaces" writer="twig" source="templates/docsify-twig/class.html.twig" />
     <transformation query="indexes.traits" writer="twig" source="templates/docsify-twig/class.html.twig" />
